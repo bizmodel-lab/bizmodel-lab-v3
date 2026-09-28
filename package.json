@@ -1,0 +1,16 @@
+{
+  "name": "bizmodel-lab-v3",
+  "version": "3.0.0",
+  "private": true,
+  "description": "创见 BizLab V3 — 商业模式设计实训系统（Node 零框架 + 外部 Postgres KV 存储）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  }
+}

@@ -16,7 +16,7 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { db, save, nextId } = require("./db");
+const { db, save, nextId, initDb, flush } = require("./db");
 const { defaultCourse } = require("./default-course");
 
 const PORT = process.env.PORT || 8700;
@@ -1120,10 +1120,21 @@ const server = http.createServer((req, res) => {
   }
 });
 
-ensureAdmin();
+/* ================= 启 动 ================= */
+initDb()
+  .then(() => {
+    ensureAdmin();
+    server.listen(PORT, () => {
+      console.log("创见 BizLab V3 已启动: http://localhost:" + PORT);
+      console.log("数据后端: " + (require("./db").pgActive() ? "外部 Postgres (DATABASE_URL)" : "本地文件 " + require("./db").DB_FILE));
+      console.log("学生可注册；教师账号由管理员在「教师账号管理」中创建。");
+    });
+  })
+  .catch(e => {
+    console.error("[启动失败] " + (e && e.stack ? e.stack : e));
+    process.exit(1);
+  });
 
-server.listen(PORT, () => {
-  console.log("创见 BizLab V3 已启动: http://localhost:" + PORT);
-  console.log("数据文件: " + require("./db").DB_FILE);
-  console.log("学生可注册；教师账号由管理员在「教师账号管理」中创建。");
-});
+// Render 停机/重启信号：冲刷未写队列后退出
+process.on("SIGTERM", () => { require("./db").flush().then(() => process.exit(0)); });
+process.on("SIGINT", () => { require("./db").flush().then(() => process.exit(0)); });

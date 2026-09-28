@@ -8,9 +8,6 @@ services:
     envVars:
       - key: PORT
         value: 10000
-      - key: DATA_DIR
-        value: /var/data
-    disk:
-      name: bizmodel-data
-      mountPath: /var/data
-      sizeGB: 1
+      - key: DATABASE_URL
+        sync: false
+        value: 发布时在 Render 控制台填写外部 Postgres 连接串（Neon/Supabase 免费实例）
