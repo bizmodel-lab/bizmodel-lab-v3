@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创见 BizLab · 商业模式设计实训系统</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo">创见 BizLab<span>商业模式设计实训系统</span></div>
+    <nav class="nav" id="sideNav"></nav>
+    <div class="userbox">
+      <div class="nm" id="ubName"></div>
+      <div class="acct" id="ubAcct"></div>
+      <button class="btn ghost sm" onclick="App.logout()">退出登录</button>
+    </div>
+  </aside>
+  <main class="main" id="main"></main>
+</div>
+<div class="modal-mask" id="modalMask" onclick="if(event.target===this)App.closeModal()">
+  <div class="modal" id="modalBox"></div>
+</div>
+<script src="/js/api.js"></script>
+<script src="/js/student.js"></script>
+<script src="/js/teacher.js"></script>
+</body>
+</html>

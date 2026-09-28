@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创见 BizLab · 商业模式设计实训系统</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-logo">创见 BizLab</div>
+    <div class="auth-sub">商业模式设计实训系统 · V3</div>
+    <div class="tabs">
+      <button id="tabLogin" class="on" onclick="Auth.switchTab('login')">登录</button>
+      <button id="tabRegister" onclick="Auth.switchTab('register')">学生注册</button>
+    </div>
+    <div id="msgBox" class="msg"></div>
+    <!-- 登录表单 -->
+    <form id="loginForm" onsubmit="return Auth.login(event)">
+      <div class="field"><label>账号</label><input id="lgAccount" autocomplete="username" placeholder="请输入账号" required></div>
+      <div class="field"><label>密码</label><input id="lgPassword" type="password" autocomplete="current-password" placeholder="请输入密码" required></div>
+      <button class="btn block" type="submit">登 录</button>
+    </form>
+    <!-- 注册表单 -->
+    <form id="registerForm" style="display:none" onsubmit="return Auth.register(event)">
+      <div class="field"><label>账号（3–32 位字母/数字/._-）</label><input id="rgAccount" placeholder="例如 zhangwei" required></div>
+      <div class="field"><label>姓名</label><input id="rgName" placeholder="真实姓名" required></div>
+      <div class="field"><label>密码（至少 6 位）</label><input id="rgPassword" type="password" autocomplete="new-password" required></div>
+      <div class="field"><label>确认密码</label><input id="rgPassword2" type="password" autocomplete="new-password" required></div>
+      <button class="btn block" type="submit">注册并登录</button>
+      <p class="hint" style="margin-top:10px">学生账号自助注册；教师账号由管理员创建，如您是教师请联系管理员。</p>
+    </form>
+  </div>
+</div>
+<script src="/js/api.js"></script>
+</body>
+</html>
